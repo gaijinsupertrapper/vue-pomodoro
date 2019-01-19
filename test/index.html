@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Test </title>
+    </head>
+    <body>
+        <style>
+            body{
+                font-size: 4em;
+            }    
+        </style>
+        <div id="timer">
+            <p id="timer"> {{timeMins}}:{{timeSecs}} </p>
+            <button @click="updateTime">Start</button>
+            <button @click="stopTimer"> Stop </button>
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
