@@ -16,9 +16,9 @@ self.addEventListener('fetch', function(evt) {
 function precache() {
     return caches.open(CACHE).then(function (cache) {
       return cache.addAll([
-        'script.js',
-        'style.css',
-        'index.html'
+        'vue-pomodoro/script.js',
+        'vue-pomodoro/style.css',
+        'vue-pomodoro/index.html'
       ]);
     });
 }
