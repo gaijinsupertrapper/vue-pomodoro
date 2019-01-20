@@ -9,11 +9,13 @@ self.addEventListener('install', function(event) {
   // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME)
-    .then(cache => cache.addAll(urlsToCache))
-    .then(self.skipWaiting())
-    .catch(err => console.error("[sw.js] Error trying to pre-fetch cache files:", err))
+      .then(function(cache) {
+        console.log('Opened cache');
+        return cache.addAll(urlsToCache).then(() => console.log('Assets added to cache'))
+        .catch(err => console.log('Error while fetching assets', err));;
+      })
   );
-  });
+});
 
 self.addEventListener('fetch', function(event) {
   event.respondWith(
