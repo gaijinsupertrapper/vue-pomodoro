@@ -12,9 +12,8 @@ self.addEventListener('install', function(event) {
     .then(cache => cache.addAll(CACHE_FILES))
     .then(self.skipWaiting())
     .catch(err => console.error("[sw.js] Error trying to pre-fetch cache files:", err))
-    )
   );
-});
+  });
 
 self.addEventListener('fetch', function(event) {
   event.respondWith(
