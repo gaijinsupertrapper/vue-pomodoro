@@ -2,20 +2,23 @@ Vue.component("timer-tabs", {
     template: `
         <div>
             <div class="set-timer" v-show="condition === '1'">
+                <ul v-if="error!=null">
+                    <li>
+                        {{error}}
+                    </li>
+                </ul>
                 <form class="timer-form" @submit.prevent="onSubmit">
-                    <p><label for="minutes"> Minutes: </label>
-                    <input name="minutes" id="minutes"  v-model="timeMins"> </p>
-                    <p><label for="seconds" > Seconds: </label>
-                    <input name="seconds" id="seconds" v-model="timeSecs"> </p>
+                    <p><input type="text" style="direction: rtl; text-align: center" name="minutes" id="minutes"  v-model="timeMins" placeholder="00"  >:<input type="text" style="direction: rtl; text-align: center" name="seconds" id="seconds" v-model="timeSecs" placeholder="00" > 
+                    </p>
 
-                    <p><input type="submit" value="Submit"></p>
+                    <p><button > <i class="fas fa-play"></i> </button></p>
                 </form>
             </div>
             <div class="timer-main" v-show="condition === '2'">
                 <p> {{timeMins}}:{{timeSecs}} </p>
-                <button @click="pauseTimer" v-show = "status === 'going' "> Pause </button>
-                <button @click="continueTimer" v-show = "status === 'stop'"> Continue </button>
-                <button @click="stopTimer" v-show = "status === 'stop'"> Stop </button>
+                <button @click="pauseTimer" v-show = "status === 'going' "> <i class="fas fa-pause"></i> </button>
+                <button @click="continueTimer" v-show = "status === 'stop'"> <i class="fas fa-play"></i> </button>
+                <button @click="stopTimer" v-show = "status === 'stop'"> <i class="fas fa-stop"></i> </button>
             </div>
         </div>
     `,
@@ -28,18 +31,30 @@ Vue.component("timer-tabs", {
             time: null,
             defaultTime: null,
             interval: null,
+            error: null,
         }
     },
     methods: {
         onSubmit(){
-            this.condition = '2'
-            this.time = this.timeMins*60 + this.timeSecs*1
-            if (this.timeSecs == null) {
-                this.timeSecs = "00"
+            if ((this.timeMins == null && this.timeSecs == null) ||
+             (this.timeMins<1 && (this.timeSecs<1 || this.timeSecs == null)  )) {
+                this.error = "Add time"
+            }else{
+                this.condition = '2'
+                this.time = this.timeMins*60 + this.timeSecs*1
+                if ((this.timeSecs < 10) && (this.timeSecs != null) && (this.timeSecs != "00")){
+                    this.timeSecs = "0" + this.timeSecs
+                }
+                if (this.timeSecs == null) {
+                    this.timeSecs = "00"
+                }
+                if (this.timeMins == null){
+                    this.timeMins = "0"
+                }
+                this.defaultTime = this.time
+                this.updateTime()
+                console.log(this.time + " " + this.timeSecs + " " + this.timeMins)
             }
-            this.defaultTime = this.time
-            this.updateTime()
-            console.log(this.time + " " + this.timeSecs + " " + this.timeMins)
         },
         updateTime(){
             const self = this
@@ -47,7 +62,14 @@ Vue.component("timer-tabs", {
                     self.time -= 1
                     self.timeMins = Math.floor(self.time/60)
                     self.timeSecs = self.time - self.timeMins*60
+                    if (self.timeSecs<10){
+                        self.timeSecs = "0" + self.timeSecs
+                    }
                     console.log(self.time)
+                    if (self.time == 0){
+                        alert("time's up!") 
+                        self.stopTimer()
+                    }
             }, 1000)
             
         },
@@ -60,7 +82,14 @@ Vue.component("timer-tabs", {
             this.status = "going"
         },
         stopTimer(){
+            clearInterval(this.interval)
             this.condition = "1"
+            this.status = "going"
+            this.timeMins = Math.floor(this.defaultTime/60)
+            this.timeSecs = this.defaultTime - this.timeMins*60
+            if (this.timeSecs <10){
+                this.timeSecs = "0" + this.timeSecs
+            }
         }
     }
 })
