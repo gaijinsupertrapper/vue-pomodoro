@@ -68,7 +68,7 @@ body{
 .timer-form p{
     margin: 0;
 }
-.timer-form input[type=text]{
+.timer-form input[type=tel]{
     background-color: rgba(200,0,0,0.3);
     border: 0;
     padding: 4px;
@@ -80,13 +80,13 @@ body{
     transition: all 0.4s ease;
 
 }
-.timer-form input[type=text]:hover{
+.timer-form input[type=tel]:hover{
     background-color: rgba(200,0,0,0.4)
 }
-.timer-form input[type=text]:focus{
+.timer-form input[type=tel]:focus{
     background-color: rgba(200,0,0,0.6)
 }
-.timer-form input[type=text]::placeholder{
+.timer-form input[type=tel]::placeholder{
     color: #444;
 }
 .timer-form button, .timer-main button{
