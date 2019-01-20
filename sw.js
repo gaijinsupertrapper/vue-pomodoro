@@ -9,7 +9,7 @@ self.addEventListener('install', function(event) {
   // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME)
-    .then(cache => cache.addAll(CACHE_FILES))
+    .then(cache => cache.addAll(urlsToCache))
     .then(self.skipWaiting())
     .catch(err => console.error("[sw.js] Error trying to pre-fetch cache files:", err))
   );
