@@ -1,31 +1,32 @@
-var CACHE_NAME = 'pomodoro-cache';
-var urlsToCache = [
-  '/',
-  '/style.css',
-  '/script.js'
-];
+var CACHE = 'cache-only';
 
-self.addEventListener('install', function(event) {
-  // Perform install steps
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(function(cache) {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
-      })
-  );
+
+ 
+self.addEventListener('install', function(evt) {
+  console.log('The service worker is being installed.');
+  evt.waitUntil(precache());
 });
 
-self.addEventListener('fetch', function(event) {
-    event.respondWith(
-      caches.match(event.request)
-        .then(function(response) {
-          // Cache hit - return response
-          if (response) {
-            return response;
-          }
-          return fetch(event.request);
-        }
-      )
-    );
+ 
+self.addEventListener('fetch', function(evt) {
+  console.log('The service worker is serving the asset.');
+  evt.respondWith(fromCache(evt.request));
 });
+
+function precache() {
+    return caches.open(CACHE).then(function (cache) {
+      return cache.addAll([
+        'script.js',
+        'style.css',
+        'index.html'
+      ]);
+    });
+}
+
+function fromCache(request) {
+    return caches.open(CACHE).then(function (cache) {
+      return cache.match(request).then(function (matching) {
+        return matching || Promise.reject('no-match');
+      });
+    });
+}
