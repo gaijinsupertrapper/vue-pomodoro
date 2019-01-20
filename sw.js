@@ -11,7 +11,6 @@ self.addEventListener('install', function(event) {
     caches.open(CACHE_NAME)
       .then(function(cache) {
         console.log('Opened cache');
-        cache.add('/');
         cache.add('style.css');
         cache.add('script.js');
         return cache;
