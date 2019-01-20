@@ -8,7 +8,7 @@ Vue.component("timer-tabs", {
                     </li>
                 </ul>
                 <form class="timer-form" @submit.prevent="onSubmit">
-                    <p><input type="text" style="direction: rtl; text-align: center" name="minutes" id="minutes"  v-model="timeMins" placeholder="00"   pattern="\d*" >:<input type="text" style="direction: rtl; text-align: center" name="seconds" id="seconds" v-model="timeSecs" placeholder="00"  pattern="\d*" > 
+                    <p><input type="tel" style="direction: rtl; text-align: center" name="minutes" id="minutes"  v-model="timeMins" placeholder="00">:<input type="tel" style="direction: rtl; text-align: center" name="seconds" id="seconds" v-model="timeSecs" placeholder="00"> 
                     </p>
 
                     <p><button > <i class="fas fa-play"></i> </button></p>
