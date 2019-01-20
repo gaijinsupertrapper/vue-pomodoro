@@ -1,9 +1,9 @@
 {
     "short_name": "Timer",
     "name": "Pomodoro Timer",
-    "start_url": "/",
+    "start_url": "/vue-pomodoro",
     "background_color": "#ee4444",
     "display": "standalone",
-    "scope": "/",
+    "scope": "/vue-pomodoro",
     "theme_color": "#ee4444"
   }
