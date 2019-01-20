@@ -1,5 +1,6 @@
 var CACHE_NAME = 'pomodoro-cache-v1';
 var urlsToCache = [
+  '/',
   'style.css',
   'script.js',
 ];
@@ -10,7 +11,9 @@ self.addEventListener('install', function(event) {
     caches.open(CACHE_NAME)
       .then(function(cache) {
         console.log('Opened cache');
-        return cache.addAll(urlsToCache);
+        cache.add('style.css');
+        cache.add('script.js');
+        return cache;
       })
   );
 });
