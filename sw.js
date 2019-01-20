@@ -11,8 +11,7 @@ self.addEventListener('install', function(event) {
     caches.open(CACHE_NAME)
       .then(function(cache) {
         console.log('Opened cache');
-        return cache.addAll(urlsToCache).then(() => console.log('Assets added to cache'))
-        .catch(err => console.log('Error while fetching assets', err));;
+        return cache.addAll(urlsToCache);
       })
   );
 });
