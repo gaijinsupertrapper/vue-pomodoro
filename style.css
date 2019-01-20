@@ -113,6 +113,6 @@ body{
     text-align: center;
 }
 
-.input:focus{
+input:focus{
     outline: none;
 }
