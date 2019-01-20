@@ -1,6 +1,6 @@
 var CACHE_NAME = 'pomodoro-cache-v1';
 var urlsToCache = [
-  '/',
+  '/index.html',
   '/style.css',
   '/script.js',
 ];
