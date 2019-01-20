@@ -102,7 +102,7 @@ let app = new Vue({
     
 })
 
-/*if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
       navigator.serviceWorker.register('/vue-pomodoro/sw.js').then(function(registration) {
         // Registration was successful
@@ -112,4 +112,4 @@ let app = new Vue({
         console.log('ServiceWorker registration failed: ', err);
       });
     });
-  } */
+  }
