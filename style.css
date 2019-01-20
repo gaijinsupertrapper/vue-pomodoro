@@ -112,3 +112,7 @@ body{
     margin: 0;
     text-align: center;
 }
+
+.input:focus{
+    outline: none;
+}
