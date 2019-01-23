@@ -40,21 +40,27 @@ Vue.component("timer-tabs", {
              (this.timeMins<1 && (this.timeSecs<1 || this.timeSecs == null)  )) {
                 this.error = "Add time"
             }else{
-                this.condition = '2'
-                this.time = this.timeMins*60 + this.timeSecs*1
-                if ((this.timeSecs < 10) && (this.timeSecs != null) && (this.timeSecs != "00")){
-                    this.timeSecs = "0" + this.timeSecs
+                if(this.timeSecs.length>2){
+                this.error = "Seconds are incorrect"        
+                }else{
+                    this.condition = '2'
+                    this.time = this.timeMins*60 + this.timeSecs*1
+                    if ((this.timeSecs < 10) && (this.timeSecs != null) && (this.timeSecs != "00")){
+                        this.timeSecs = "0" + this.timeSecs
+                    }
+                    if (this.timeSecs == null) {
+                        this.timeSecs = "00"
+                    }
+                    if (this.timeMins == null){
+                        this.timeMins = "0"
+                    }
+                    this.defaultTime = this.time
+                    this.updateTime()
+                    console.log(this.time + " " + this.timeSecs + " " + this.timeMins)
                 }
-                if (this.timeSecs == null) {
-                    this.timeSecs = "00"
-                }
-                if (this.timeMins == null){
-                    this.timeMins = "0"
-                }
-                this.defaultTime = this.time
-                this.updateTime()
-                console.log(this.time + " " + this.timeSecs + " " + this.timeMins)
-            }
+            } 
+            
+            
         },
         updateTime(){
             const self = this
